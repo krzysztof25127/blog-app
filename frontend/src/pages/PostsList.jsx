@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import { API_BASE } from "../utils/api";
 
 export default function PostsList() {
   const [posts, setPosts] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/posts")
+    fetch(`${API_BASE}/posts`)
       .then((res) => res.json())
       .then(setPosts);
   }, []);
@@ -14,7 +15,7 @@ export default function PostsList() {
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this post?")) return;
     try {
-      const res = await fetch(`http://localhost:5000/api/posts/${id}`, {
+      const res = await fetch(`${API_BASE}/posts/${id}`, {
         method: "DELETE",
       });
       if (!res.ok) throw new Error("Failed to delete post");

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { API_BASE } from "../utils/api";
 
 export default function EditPost() {
   const { id } = useParams();
@@ -8,7 +9,7 @@ export default function EditPost() {
   const [content, setContent] = useState("");
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/posts/${id}`)
+    fetch(`${API_BASE}/posts/${id}`)
       .then((res) => {
         if (!res.ok) throw new Error("Post not found");
         return res.json();
@@ -23,7 +24,7 @@ export default function EditPost() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch(`http://localhost:5000/api/posts/${id}`, {
+      const res = await fetch(`${API_BASE}/posts/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ title, content }),

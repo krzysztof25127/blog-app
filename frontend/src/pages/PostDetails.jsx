@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { API_BASE } from "../utils/api";
 
 export default function PostDetails() {
   const { id } = useParams();
@@ -7,7 +8,7 @@ export default function PostDetails() {
   const [post, setPost] = useState(null);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/posts/${id}`)
+    fetch(`${API_BASE}/posts/${id}`)
       .then((res) => res.json())
       .then(setPost);
   }, [id]);

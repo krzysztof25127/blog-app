@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { API_BASE } from "../utils/api";
 
 export default function AddPost() {
   const [title, setTitle] = useState("");
@@ -9,7 +10,7 @@ export default function AddPost() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch("http://localhost:5000/api/posts", {
+      const res = await fetch(`${API_BASE}/posts`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ title, content }),
